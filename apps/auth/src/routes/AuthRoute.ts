@@ -20,7 +20,7 @@ router.post('/siwe', async (req:Request, res:Response) => {
             return res.status(400).json({ message: "Missing message or signature" });
         }
 
-        // Parse the SIWE message string back to object
+      
         const siweMessage = new SiweMessage(message);
 
         const verifyResult = await siweMessage.verify({ signature });
