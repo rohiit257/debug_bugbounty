@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react"
 import BountyCard, { type Bounty } from "@/components/BountyCard"
 import SearchFilters, { type Filters } from "@/components/SearchFilters"
+import { StickyBanner } from "@/components/ui/sticky-banner"
+import { StickyBannerComp } from "@/components/StickyBanner"
 
 const ongoing: Bounty[] = [
   {
@@ -87,7 +89,9 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="relative overflow-hidden">
+      <StickyBannerComp/>
         <div className="relative px-4 py-16 sm:px-6 lg:px-8">
+        
           <div className="mx-auto max-w-5xl text-center">
             <h1 className="mb-4 bg-gradient-to-r from-white via-zinc-200 to-[#A7EF9E] bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl lg:text-6xl font-mono">
               Security Bounties
