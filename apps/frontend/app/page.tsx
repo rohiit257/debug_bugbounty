@@ -12,6 +12,8 @@ function Page() {
   const {data:session} = useSession()
 
 
+ 
+
   return (
     <div className="fixed inset-0 w-full h-full bg-black overflow-hidden">
       <FaultyTerminal
@@ -41,7 +43,7 @@ function Page() {
           
         </h1>
         <p className="text-white text-2xl mb-12 opacity-90 font-mono drop-shadow-lg text-center max-w-xl">
-          Your Code Isnt Special <br /> We'll Prove It
+          Your Code Isnt Special <br /> We'll Prove It 
         </p>
         <div className="dark dark:decoration-stone-200 flex flex-wrap items-center md:flex-row">
           <Button onClick={()=>{

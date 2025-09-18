@@ -68,7 +68,7 @@ export default function SearchFilters({ onSearch, variant = "default" }: SearchF
   const getInputStyles = () => {
     switch (variant) {
       case "onDark":
-        return "bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-white/40 focus:bg-white/15"
+        return "bg-white/5 border-white/10 text-white placeholder:text-white/60 focus:border-[#A7EF9E]/40 focus:bg-white/10"
       case "onGreen":
         return "bg-white/90 border-black/10 text-black placeholder:text-black/60 focus:border-black/20"
       default:
@@ -79,7 +79,7 @@ export default function SearchFilters({ onSearch, variant = "default" }: SearchF
   const getButtonStyles = () => {
     switch (variant) {
       case "onDark":
-        return "bg-white text-gray-900 hover:bg-gray-100"
+        return "bg-[#A7EF9E] text-black hover:brightness-95"
       case "onGreen":
         return "bg-white text-gray-900 hover:bg-gray-100"
       default:
@@ -90,7 +90,7 @@ export default function SearchFilters({ onSearch, variant = "default" }: SearchF
   const getFilterButtonStyles = () => {
     switch (variant) {
       case "onDark":
-        return "text-white/80 hover:text-white hover:bg-white/10"
+        return "text-white/90 hover:text-white hover:bg-white/10 border border-white/10"
       case "onGreen":
         return "bg-white text-gray-900 hover:bg-gray-100 border border-gray-200"
       default:
@@ -103,7 +103,7 @@ export default function SearchFilters({ onSearch, variant = "default" }: SearchF
       case "onGreen":
         return "rounded-2xl border border-black/10 bg-white/80 p-4 shadow-sm backdrop-blur-sm"
       case "onDark":
-        return ""
+        return "rounded-2xl border border-white/10 bg-white/5 p-4 shadow-sm backdrop-blur"
       default:
         return ""
     }
@@ -114,7 +114,7 @@ export default function SearchFilters({ onSearch, variant = "default" }: SearchF
       {/* Main Search Bar */}
       <div className="flex gap-3">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#A7EF9E]" />
           <input
             type="text"
             placeholder="Search bounties, companies, or technologies..."
@@ -129,7 +129,7 @@ export default function SearchFilters({ onSearch, variant = "default" }: SearchF
           onClick={() => setShowFilters(!showFilters)}
           className={`flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${getFilterButtonStyles()}`}
         >
-          <Filter className="h-4 w-4" />
+          <Filter className="h-4 w-4 text-[#A7EF9E]" />
           Filters
         </button>
 
@@ -143,14 +143,14 @@ export default function SearchFilters({ onSearch, variant = "default" }: SearchF
 
       {/* Advanced Filters */}
       {showFilters && (
-        <div className="rounded-xl border border-gray-200/60 bg-white/50 p-6 backdrop-blur-sm dark:border-gray-800/60 dark:bg-gray-900/50">
+        <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur">
           <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Advanced Filters</h3>
+            <h3 className="text-sm font-semibold text-white">Advanced Filters</h3>
             <button
               onClick={clearFilters}
-              className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              className="flex items-center gap-1 text-xs text-zinc-400 hover:text-white"
             >
-              <X className="h-3 w-3" />
+              <X className="h-3 w-3 text-[#A7EF9E]" />
               Clear all
             </button>
           </div>
@@ -158,7 +158,7 @@ export default function SearchFilters({ onSearch, variant = "default" }: SearchF
           <div className="space-y-6">
             {/* Tags */}
             <div>
-              <label className="mb-2 block text-xs font-medium text-gray-700 dark:text-gray-300">Technologies</label>
+              <label className="mb-2 block text-xs font-medium text-zinc-300">Technologies</label>
               <div className="flex flex-wrap gap-2">
                 {popularTags.map((tag) => (
                   <button
@@ -166,8 +166,8 @@ export default function SearchFilters({ onSearch, variant = "default" }: SearchF
                     onClick={() => toggleTag(tag)}
                     className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
                       selectedTags.includes(tag)
-                        ? "bg-[#A7EF9E] text-gray-900"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+                        ? "bg-[#A7EF9E] text-black"
+                        : "bg-white/5 text-zinc-300 hover:bg-white/10"
                     }`}
                   >
                     {tag}
@@ -179,25 +179,25 @@ export default function SearchFilters({ onSearch, variant = "default" }: SearchF
             {/* Reward Range */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="mb-2 block text-xs font-medium text-gray-700 dark:text-gray-300">
+                <label className="mb-2 block text-xs font-medium text-zinc-300">
                   Min Reward ($)
                 </label>
                 <input
                   type="number"
                   value={minReward}
                   onChange={(e) => setMinReward(Number(e.target.value))}
-                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm focus:border-gray-300 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+                  className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/60 focus:border-[#A7EF9E]/40 focus:outline-none"
                 />
               </div>
               <div>
-                <label className="mb-2 block text-xs font-medium text-gray-700 dark:text-gray-300">
+                <label className="mb-2 block text-xs font-medium text-zinc-300">
                   Max Reward ($)
                 </label>
                 <input
                   type="number"
                   value={maxReward}
                   onChange={(e) => setMaxReward(Number(e.target.value))}
-                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm focus:border-gray-300 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+                  className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-white/60 focus:border-[#A7EF9E]/40 focus:outline-none"
                 />
               </div>
             </div>
@@ -205,7 +205,7 @@ export default function SearchFilters({ onSearch, variant = "default" }: SearchF
             {/* Difficulty & Status */}
             <div className="grid grid-cols-2 gap-6">
               <div>
-                <label className="mb-2 block text-xs font-medium text-gray-700 dark:text-gray-300">Difficulty</label>
+                <label className="mb-2 block text-xs font-medium text-zinc-300">Difficulty</label>
                 <div className="space-y-2">
                   {difficulties.map((difficulty) => (
                     <label key={difficulty} className="flex items-center gap-2">
@@ -213,16 +213,16 @@ export default function SearchFilters({ onSearch, variant = "default" }: SearchF
                         type="checkbox"
                         checked={selectedDifficulties.includes(difficulty)}
                         onChange={() => toggleDifficulty(difficulty)}
-                        className="rounded border-gray-300 text-gray-900 focus:ring-gray-500"
+                        className="rounded border-white/20 bg-white/5 text-[#A7EF9E] focus:ring-[#A7EF9E]/30"
                       />
-                      <span className="text-xs capitalize text-gray-700 dark:text-gray-300">{difficulty}</span>
+                      <span className="text-xs capitalize text-zinc-300">{difficulty}</span>
                     </label>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="mb-2 block text-xs font-medium text-gray-700 dark:text-gray-300">Status</label>
+                <label className="mb-2 block text-xs font-medium text-zinc-300">Status</label>
                 <div className="space-y-2">
                   {statuses.map((status) => (
                     <label key={status} className="flex items-center gap-2">
@@ -230,9 +230,9 @@ export default function SearchFilters({ onSearch, variant = "default" }: SearchF
                         type="checkbox"
                         checked={selectedStatuses.includes(status)}
                         onChange={() => toggleStatus(status)}
-                        className="rounded border-gray-300 text-gray-900 focus:ring-gray-500"
+                        className="rounded border-white/20 bg-white/5 text-[#A7EF9E] focus:ring-[#A7EF9E]/30"
                       />
-                      <span className="text-xs capitalize text-gray-700 dark:text-gray-300">{status}</span>
+                      <span className="text-xs capitalize text-zinc-300">{status}</span>
                     </label>
                   ))}
                 </div>

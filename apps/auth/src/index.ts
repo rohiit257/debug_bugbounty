@@ -15,6 +15,7 @@ app.use(
   );
 
 app.use('/api/auth', router)
+
 app.use('/api/auth/health', router)
 
 app.listen(PORT,() =>{

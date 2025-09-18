@@ -85,22 +85,20 @@ export default function Page() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50/30 dark:bg-gray-950">
+    <div className="min-h-screen bg-black text-white">
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[#A7EF9E]"  />
-
         <div className="relative px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-5xl text-center">
-            <h1 className="mb-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl font-mono">
+            <h1 className="mb-4 bg-gradient-to-r from-white via-zinc-200 to-[#A7EF9E] bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl lg:text-6xl font-mono">
               Security Bounties
             </h1>
-            <p className="mx-auto mb-10 max-w-3xl text-lg leading-relaxed text-gray-700 font-mono">
+            <p className="mx-auto mb-10 max-w-3xl text-lg leading-relaxed text-zinc-400 font-mono">
               Discover high-impact security opportunities, connect with leading companies, and earn rewards for your
               expertise.
             </p>
 
             <div className="mx-auto max-w-3xl">
-              <SearchFilters onSearch={handleSearch} variant="onGreen" />
+              <SearchFilters onSearch={handleSearch} variant="onDark" />
             </div>
           </div>
         </div>
@@ -110,8 +108,8 @@ export default function Page() {
         <div className="space-y-16">
           <section>
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Ongoing Bounties</h2>
-              <p className="mt-2 text-gray-600 dark:text-gray-400">
+              <h2 className="text-2xl font-bold text-white">Ongoing Bounties</h2>
+              <p className="mt-2 text-zinc-400">
                 Active security programs currently accepting submissions
               </p>
             </div>
@@ -130,8 +128,8 @@ export default function Page() {
 
           <section>
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">New Opportunities</h2>
-              <p className="mt-2 text-gray-600 dark:text-gray-400">Fresh bounties posted in the last 24 hours</p>
+              <h2 className="text-2xl font-bold text-white">New Opportunities</h2>
+              <p className="mt-2 text-zinc-400">Fresh bounties posted in the last 24 hours</p>
             </div>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {newOpps.map((bounty, index) => (
@@ -148,8 +146,8 @@ export default function Page() {
 
           <section>
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Top Paying Programs</h2>
-              <p className="mt-2 text-gray-600 dark:text-gray-400">High-value bounties with substantial rewards</p>
+              <h2 className="text-2xl font-bold text-white">Top Paying Programs</h2>
+              <p className="mt-2 text-zinc-400">High-value bounties with substantial rewards</p>
             </div>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {topPaying.map((bounty, index) => (

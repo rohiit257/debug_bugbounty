@@ -7,23 +7,19 @@ import Navbar from "@/components/Navbar"
 
 export default function LayoutChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname()
-  const hideOn = ["/login"]
+  const hideOn = ["/login",'/']
   const shouldHide = hideOn.includes(pathname)
-
-  if (shouldHide) {
-    return (
-      <main className="mx-auto max-w-6xl px-3 py-4">
-        {children}
-      </main>
-    )
-  }
 
   return (
     <>
-      <Sidebar />
-      <div className="pl-16">
-        <Navbar />
-        <main className="mx-auto max-w-6xl px-3 py-4">
+      <div className={shouldHide ? 'hidden' : ''}>
+        <Sidebar />
+      </div>
+      <div className={`${shouldHide ? 'pl-0' : 'pl-16'} min-h-screen w-full`}>
+        <div className={shouldHide ? 'hidden' : ''}>
+          <Navbar />
+        </div>
+        <main className="w-full min-h-screen px-0 py-0">
           {children}
         </main>
       </div>
