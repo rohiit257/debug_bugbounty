@@ -34,7 +34,8 @@ export const authOptions: AuthOptions = {
           if (user && user.address) {
             return {
               id: user.address, // wallet address becomes ID
-              name: user.name || "Ethereum User",
+              wallet: user.address,
+              name: user.name || null,
               email: user.email || null, // optional if you want to bind email later
               token: response.data.token, // JWT from backend
             }
@@ -62,5 +63,8 @@ export const authOptions: AuthOptions = {
       if (token.user) session.user = token.user as any
       return session
     },
+  },
+  pages: {
+    signIn: "/login",
   },
 }

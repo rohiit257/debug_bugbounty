@@ -43,11 +43,12 @@ const CreateProfileDialogue = ({
     },
   });
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    setOpen(false);
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>Open</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Create Your Profile</DialogTitle>

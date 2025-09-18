@@ -1,15 +1,24 @@
-'use client'
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import CustomConnectButton from '@/components/ConnectWalletButton'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
+import CreateProfileDialogue from '@/components/CreateProfileDialogue'
 
 const LoginPage = () => {
-    const user = useSession()
+    const { status, data: session } = useSession()
+    const [openProfile, setOpenProfile] = useState(false)
 
-    if(user){
-        redirect('/timeline')
-    }
+    useEffect(() => {
+      if (status === 'authenticated') {
+        const hasName = Boolean((session as any)?.user?.name)
+        if (!hasName) {
+          setOpenProfile(true)
+        } else {
+          redirect('/timeline')
+        }
+      }
+    }, [status, session])
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-gray-900 to-gray-800">
       <div className="bg-black bg-opacity-70 rounded-2xl px-10 py-12 flex flex-col items-center shadow-2xl">
@@ -21,6 +30,7 @@ const LoginPage = () => {
         </p>
         <CustomConnectButton />
       </div>
+      <CreateProfileDialogue open={openProfile} setOpen={setOpenProfile} />
     </div>
   )
 }
