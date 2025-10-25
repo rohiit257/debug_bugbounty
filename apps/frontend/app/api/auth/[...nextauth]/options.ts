@@ -30,15 +30,32 @@ export const authOptions: AuthOptions = {
           )
 
           const user = response.data.user
+          console.log("✅ User from backend:", user)
 
           if (user && user.address) {
-            return {
-              id: user.address, // wallet address becomes ID
+            const userObj = {
+              id: user.id,
               wallet: user.address,
               name: user.name || null,
-              email: user.email || null, // optional if you want to bind email later
-              token: response.data.token, // JWT from backend
+              email: user.email || null,
+              role: user.role,
+              onboardingStatus: user.onboardingStatus,
+              bio: user.bio,
+              avatar: user.avatar,
+              location: user.location,
+              website: user.website,
+              twitter: user.twitter,
+              github: user.github,
+              linkedin: user.linkedin,
+              discord: user.discord,
+              telegram: user.telegram,
+              badges: user.badges,
+              orgName: user.orgName,
+              orgWebsite: user.orgWebsite,
+              token: response.data.token,
             }
+            console.log("✅ Returning user object:", userObj)
+            return userObj
           }
 
           return null
@@ -56,7 +73,10 @@ export const authOptions: AuthOptions = {
 
   callbacks: {
     async jwt({ token, user, trigger, session }) {
-      if (user) token.user = user
+      if (user) {
+        token.user = user
+        console.log("✅ JWT callback - user added to token:", token.user)
+      }
       
       // Update token when session is updated
       if (trigger === "update" && session) {
@@ -66,7 +86,10 @@ export const authOptions: AuthOptions = {
       return token
     },
     async session({ session, token }) {
-      if (token.user) session.user = token.user as any
+      if (token.user) {
+        session.user = token.user as any
+        console.log("✅ Session callback - user in session:", session.user)
+      }
       return session
     },
   },

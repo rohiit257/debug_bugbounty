@@ -8,6 +8,7 @@ import { http } from "viem";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { polygon, mainnet, sepolia } from "wagmi/chains";
 import "@rainbow-me/rainbowkit/styles.css";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const queryClient = new QueryClient();
 
@@ -23,15 +24,17 @@ const wagmiConfig = createConfig({
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
-    <SessionProvider>
-      <WagmiProvider config={wagmiConfig}>
-        <QueryClientProvider client={queryClient}>
-          <RainbowKitProvider modalSize="compact">
-            {children}
-          </RainbowKitProvider>
-        </QueryClientProvider>
-      </WagmiProvider>
-    </SessionProvider>
+    <ThemeProvider>
+      <SessionProvider>
+        <WagmiProvider config={wagmiConfig}>
+          <QueryClientProvider client={queryClient}>
+            <RainbowKitProvider modalSize="compact">
+              {children}
+            </RainbowKitProvider>
+          </QueryClientProvider>
+        </WagmiProvider>
+      </SessionProvider>
+    </ThemeProvider>
   );
 }
 

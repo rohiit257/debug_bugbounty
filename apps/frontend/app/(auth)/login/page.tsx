@@ -11,11 +11,15 @@ const LoginPage = () => {
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
-      if (status === 'authenticated') {
-        const hasName = Boolean((session as any)?.user?.name)
-        if (!hasName) {
-          setOpenProfile(true)
-        } else {
+      if (status === 'authenticated' && session?.user) {
+        const user = session.user as any
+        
+        // Redirect based on onboarding status
+        if (user.onboardingStatus === 'PENDING') {
+          redirect('/onboarding/role')
+        } else if (user.onboardingStatus === 'ROLE_SELECTED') {
+          redirect('/onboarding/profile')
+        } else if (user.onboardingStatus === 'COMPLETED') {
           redirect('/timeline')
         }
       }

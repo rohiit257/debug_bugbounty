@@ -19,17 +19,44 @@ enum UserRole {
   ADMIN    
 }
 
+enum OnboardingStatus {
+  PENDING       // Just connected wallet
+  ROLE_SELECTED // Selected role
+  COMPLETED     // Completed profile
+}
+
 model User {
   id         String    @id @default(cuid())
   address    String    @unique              
   email      String?   @unique
   name       String?
-  role       UserRole  @default(HUNTER)
+  role       UserRole?  // Nullable until role is selected
   bio        String?
   reputation Int       @default(0)
+  
+  // Onboarding
+  onboardingStatus OnboardingStatus @default(PENDING)
+  
+  // Profile fields
+  avatar     String?   // Avatar URL or IPFS hash
+  location   String?
+  website    String?
+  
+  // Social links
+  twitter    String?
+  github     String?
+  linkedin   String?
+  discord    String?
+  telegram   String?
+  
+  // Badges (JSON array of badge objects)
+  badges     Json?     @default("[]")
+  
+  // Organization specific
+  orgName    String?   // For ORG role
+  orgWebsite String?   // For ORG role
 
   // Relations
-  bounties      Bounty[]       @relation("OrgBounties") 
   submissions   Submission[]   
 
   createdAt  DateTime @default(now())
@@ -44,10 +71,9 @@ model Bounty {
   reward      Float
   deadline    DateTime
   status      BountyStatus  @default(OPEN)
+  orgId       String?       // Just a string field, no foreign key
 
   // Relations
-  orgId       String
-  org         User          @relation("OrgBounties", fields: [orgId], references: [id])
   submissions Submission[]
 
   createdAt   DateTime @default(now())
