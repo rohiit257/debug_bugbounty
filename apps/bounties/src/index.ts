@@ -5,7 +5,7 @@ dotenv.config()
 
 import express from "express"
 import cors from "cors"
-import OnChainBountyRoute from "./routes/OnChainBountyRoute"
+import BountyRoute from "./routes/BountyRoute"
 import SubmissionRoute from "./routes/SubmissionRoute"
 
 const app = express()
@@ -15,8 +15,8 @@ app.use(cors({
     origin: "http://localhost:3000"
 }))
 
-// Use fully on-chain bounty routes
-app.use("/bounties", OnChainBountyRoute)
+// Use unified bounty routes
+app.use("/bounties", BountyRoute)
 app.use("/submissions", SubmissionRoute)
 
 app.listen(8001, () => {

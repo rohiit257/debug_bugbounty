@@ -186,25 +186,22 @@ export default function CreateBountyPage() {
           <div>
             <label htmlFor="reward" className="mb-2 flex items-center gap-2 text-sm font-medium text-white">
               <DollarSign className="h-4 w-4 text-[#A7EF9E]" />
-              Reward (USD)
+              Reward (MON)
               <span className="text-red-400">*</span>
             </label>
-            <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/60">$</span>
-              <input
-                type="number"
-                id="reward"
-                name="reward"
-                value={formData.reward}
-                onChange={handleChange}
-                placeholder="5000"
-                required
-                min="0"
-                step="0.01"
-                className="w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-8 pr-4 text-white placeholder:text-white/40 focus:border-[#A7EF9E]/30 focus:outline-none focus:ring-2 focus:ring-[#A7EF9E]/20"
-              />
-            </div>
-            <p className="mt-1 text-xs text-white/40">Set a competitive reward to attract skilled researchers</p>
+            <input
+              type="number"
+              id="reward"
+              name="reward"
+              value={formData.reward}
+              onChange={handleChange}
+              placeholder="100"
+              required
+              min="0"
+              step="0.01"
+              className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 focus:border-[#A7EF9E]/30 focus:outline-none focus:ring-2 focus:ring-[#A7EF9E]/20"
+            />
+            <p className="mt-1 text-xs text-white/40">Set a competitive reward in MON tokens to attract skilled researchers</p>
           </div>
 
           {/* Deadline */}

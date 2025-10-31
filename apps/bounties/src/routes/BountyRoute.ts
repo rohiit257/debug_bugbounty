@@ -11,7 +11,7 @@ const pinata = new PinataSDK(
   process.env.PINATA_API_SECRET || ""
 );
 
-// Initialize Ethereum provider and wallet
+// Initialize Monad provider and wallet
 const provider = new ethers.JsonRpcProvider(process.env.RPC_URL || "http://localhost:8545");
 
 let wallet: ethers.Wallet | null = null;
@@ -295,8 +295,25 @@ router.post("/", async (req: Request, res: Response) => {
     // Step 3: Submit blockchain transaction (if wallet is configured)
     if (contract && wallet) {
       try {
+        // Validate reward amount
+        if (Number(reward) <= 0) {
+          throw new Error("Reward must be greater than 0 MON");
+        }
+
         const deadlineTimestamp = Math.floor(new Date(deadline).getTime() / 1000);
+        
+        // Validate deadline is in the future
+        if (deadlineTimestamp <= Math.floor(Date.now() / 1000)) {
+          throw new Error("Deadline must be in the future");
+        }
+
         const rewardInWei = ethers.parseEther(String(reward));
+        
+        // Check wallet balance
+        const walletBalance = await provider.getBalance(wallet.address);
+        if (walletBalance < rewardInWei) {
+          throw new Error(`Insufficient MON balance in relayer wallet. Required: ${ethers.formatEther(rewardInWei)} MON, Available: ${ethers.formatEther(walletBalance)} MON`);
+        }
 
         const tx = await (contract as any).createBounty(
           title,
@@ -849,7 +866,7 @@ router.post("/submissions/:id/approve-perfect", async (req: Request, res: Respon
             },
             {
               trait_type: "Reward Amount",
-              value: `${rewardAmount} ETH`
+              value: `${rewardAmount} MON`
             },
             {
               trait_type: "Submission Date",

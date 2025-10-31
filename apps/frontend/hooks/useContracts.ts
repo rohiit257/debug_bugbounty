@@ -36,10 +36,21 @@ export function useContracts() {
     })
   }
 
+  const createBounty = async (title: string, descriptionCid: string, deadline: number, rewardAmount: string) => {
+    return writeContract({
+      address: CONTRACT_ADDRESSES.BOUNTY_PLATFORM as `0x${string}`,
+      abi: BOUNTY_PLATFORM_ABI,
+      functionName: 'createBounty',
+      args: [title, descriptionCid, BigInt(deadline)],
+      value: parseEther(rewardAmount),
+    })
+  }
+
   return {
     approveHacker,
     fundBountyAsHacker,
     approvePerfectSubmission,
+    createBounty,
     hash,
     isPending,
     isConfirming,

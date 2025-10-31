@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation"
 import { 
   User, Mail, Shield, Trophy, FileText, CheckCircle2, XCircle, Clock, 
   TrendingUp, Award, Target, DollarSign, Calendar, Edit, Bug, MapPin, Globe,
-  Twitter, Github, Linkedin, MessageCircle, Send
+  Twitter, Github, Linkedin, MessageCircle, Send, Flame, Star, Medal, Zap,
+  Crown, Gem, Lock, Unlock
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -162,6 +163,33 @@ export default function ProfilePage() {
     totalRewards: bounties.reduce((sum, b) => sum + b.reward, 0)
   } : null
 
+  // Dummy data for streaks, badges, and achievements
+  const streaks = {
+    current: 12,
+    longest: 45,
+    totalDays: 180
+  }
+
+  const badges = [
+    { id: 1, name: "First Bug", description: "Submitted your first bug report", icon: Star, color: "text-yellow-400", earned: true, earnedDate: "2024-01-15" },
+    { id: 2, name: "Perfect Hunter", description: "10 approved submissions", icon: Crown, color: "text-purple-400", earned: true, earnedDate: "2024-02-20" },
+    { id: 3, name: "High Value", description: "Found a bug worth $10k+", icon: Gem, color: "text-blue-400", earned: true, earnedDate: "2024-03-10" },
+    { id: 4, name: "Consistency King", description: "30 day streak", icon: Flame, color: "text-orange-400", earned: true, earnedDate: "2024-04-05" },
+    { id: 5, name: "Top Contributor", description: "50 total submissions", icon: Trophy, color: "text-emerald-400", earned: false, earnedDate: null },
+    { id: 6, name: "Quick Draw", description: "First to submit on 5 bounties", icon: Zap, color: "text-pink-400", earned: false, earnedDate: null },
+    { id: 7, name: "Elite Hunter", description: "100 approved submissions", icon: Medal, color: "text-indigo-400", earned: false, earnedDate: null },
+    { id: 8, name: "Centurion", description: "100 day streak", icon: Flame, color: "text-red-400", earned: false, earnedDate: null }
+  ]
+
+  const achievements = [
+    { id: 1, title: "Bug Hunter Novice", description: "Submit your first bug report", progress: 100, target: 1, current: 1, icon: Star, unlocked: true },
+    { id: 2, title: "Approval Master", description: "Get 10 submissions approved", progress: 70, target: 10, current: 7, icon: CheckCircle2, unlocked: false },
+    { id: 3, title: "Earnings Milestone", description: "Earn $50,000 in rewards", progress: 45, target: 50000, current: 22500, icon: DollarSign, unlocked: false },
+    { id: 4, title: "Streak Champion", description: "Maintain a 30-day streak", progress: 40, target: 30, current: 12, icon: Flame, unlocked: false },
+    { id: 5, title: "Diversity Expert", description: "Submit to 20 different bounties", progress: 60, target: 20, current: 12, icon: Target, unlocked: false },
+    { id: 6, title: "Quick Response", description: "Submit within 24 hours of bounty creation 10 times", progress: 50, target: 10, current: 5, icon: Zap, unlocked: false }
+  ]
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -260,6 +288,160 @@ export default function ProfilePage() {
                     <DollarSign className="h-5 w-5 text-[#A7EF9E]" />
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Streaks Section */}
+            <div className="mb-8 rounded-xl border border-border bg-card p-6">
+              <div className="mb-6 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Flame className="h-6 w-6 text-orange-400" />
+                  <h2 className="text-xl font-semibold text-foreground">Activity Streak</h2>
+                </div>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-3">
+                <div className="rounded-lg border border-border bg-muted p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Flame className="h-5 w-5 text-orange-400" />
+                    <p className="text-sm font-medium text-foreground">Current Streak</p>
+                  </div>
+                  <p className="text-3xl font-bold text-orange-400">{streaks.current}</p>
+                  <p className="text-xs text-muted-foreground mt-1">days in a row</p>
+                </div>
+                <div className="rounded-lg border border-border bg-muted p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Trophy className="h-5 w-5 text-purple-400" />
+                    <p className="text-sm font-medium text-foreground">Longest Streak</p>
+                  </div>
+                  <p className="text-3xl font-bold text-purple-400">{streaks.longest}</p>
+                  <p className="text-xs text-muted-foreground mt-1">days achieved</p>
+                </div>
+                <div className="rounded-lg border border-border bg-muted p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Calendar className="h-5 w-5 text-blue-400" />
+                    <p className="text-sm font-medium text-foreground">Total Active Days</p>
+                  </div>
+                  <p className="text-3xl font-bold text-blue-400">{streaks.totalDays}</p>
+                  <p className="text-xs text-muted-foreground mt-1">days total</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Badges Section */}
+            <div className="mb-8 rounded-xl border border-border bg-card p-6">
+              <div className="mb-6 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Medal className="h-6 w-6 text-yellow-400" />
+                  <h2 className="text-xl font-semibold text-foreground">Badges</h2>
+                </div>
+                <span className="text-sm text-muted-foreground">
+                  {badges.filter(b => b.earned).length} / {badges.length} earned
+                </span>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {badges.map((badge) => {
+                  const BadgeIcon = badge.icon
+                  return (
+                    <div
+                      key={badge.id}
+                      className={`rounded-lg border p-4 transition-all ${
+                        badge.earned
+                          ? "border-[#A7EF9E]/30 bg-[#A7EF9E]/5 hover:bg-[#A7EF9E]/10"
+                          : "border-border bg-muted/50 opacity-60"
+                      }`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className={`${badge.earned ? badge.color : "text-muted-foreground"}`}>
+                          <BadgeIcon className="h-8 w-8" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className={`text-sm font-semibold ${badge.earned ? "text-foreground" : "text-muted-foreground"}`}>
+                              {badge.name}
+                            </h3>
+                            {badge.earned ? (
+                              <CheckCircle2 className="h-4 w-4 text-[#A7EF9E] flex-shrink-0" />
+                            ) : (
+                              <Lock className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                            )}
+                          </div>
+                          <p className="text-xs text-muted-foreground mb-2">{badge.description}</p>
+                          {badge.earned && badge.earnedDate && (
+                            <p className="text-xs text-[#A7EF9E]">
+                              Earned {new Date(badge.earnedDate).toLocaleDateString()}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* Achievements Section */}
+            <div className="mb-8 rounded-xl border border-border bg-card p-6">
+              <div className="mb-6 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Award className="h-6 w-6 text-emerald-400" />
+                  <h2 className="text-xl font-semibold text-foreground">Achievements</h2>
+                </div>
+                <span className="text-sm text-muted-foreground">
+                  {achievements.filter(a => a.unlocked).length} / {achievements.length} completed
+                </span>
+              </div>
+              <div className="space-y-4">
+                {achievements.map((achievement) => {
+                  const AchievementIcon = achievement.icon
+                  return (
+                    <div
+                      key={achievement.id}
+                      className={`rounded-lg border p-4 transition-all ${
+                        achievement.unlocked
+                          ? "border-[#A7EF9E]/30 bg-[#A7EF9E]/5"
+                          : "border-border bg-muted/50"
+                      }`}
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className={`rounded-lg p-3 ${achievement.unlocked ? "bg-[#A7EF9E]/10" : "bg-muted"}`}>
+                          <AchievementIcon className={`h-6 w-6 ${achievement.unlocked ? "text-[#A7EF9E]" : "text-muted-foreground"}`} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-2">
+                            <h3 className={`font-semibold ${achievement.unlocked ? "text-foreground" : "text-muted-foreground"}`}>
+                              {achievement.title}
+                            </h3>
+                            {achievement.unlocked ? (
+                              <CheckCircle2 className="h-5 w-5 text-[#A7EF9E] flex-shrink-0" />
+                            ) : (
+                              <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+                            )}
+                          </div>
+                          <p className="text-sm text-muted-foreground mb-3">{achievement.description}</p>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-muted-foreground">Progress</span>
+                              <span className={`font-medium ${achievement.unlocked ? "text-[#A7EF9E]" : "text-foreground"}`}>
+                                {achievement.current} / {achievement.target}
+                              </span>
+                            </div>
+                            <div className="h-2 rounded-full bg-muted overflow-hidden">
+                              <div
+                                className={`h-full rounded-full transition-all ${
+                                  achievement.unlocked ? "bg-[#A7EF9E]" : "bg-blue-400"
+                                }`}
+                                style={{ width: `${Math.min(achievement.progress, 100)}%` }}
+                              />
+                            </div>
+                            {achievement.unlocked && (
+                              <p className="text-xs text-[#A7EF9E] font-medium">Achievement Unlocked!</p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
             </div>
 

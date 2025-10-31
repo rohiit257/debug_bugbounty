@@ -52,7 +52,7 @@ export default function PerfectSubmissionDialog({
           },
           {
             trait_type: "Reward Amount",
-            value: `${rewardAmount} ETH`
+            value: `${rewardAmount} MON`
           },
           {
             trait_type: "Hunter",
@@ -138,7 +138,7 @@ export default function PerfectSubmissionDialog({
 
             {/* Reward Amount */}
             <div className="space-y-2">
-              <Label htmlFor="rewardAmount">Reward Amount (ETH) *</Label>
+              <Label htmlFor="rewardAmount">Reward Amount (MON) *</Label>
               <Input
                 id="rewardAmount"
                 type="number"

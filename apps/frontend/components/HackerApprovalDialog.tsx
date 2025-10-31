@@ -96,7 +96,7 @@ export default function HackerApprovalDialog({ trigger }: HackerApprovalDialogPr
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="fundLimit">Fund Limit (ETH)</Label>
+              <Label htmlFor="fundLimit">Fund Limit (MON)</Label>
               <Input
                 id="fundLimit"
                 type="number"

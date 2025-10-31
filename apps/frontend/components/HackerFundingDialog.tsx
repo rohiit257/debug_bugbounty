@@ -125,7 +125,7 @@ export default function HackerFundingDialog({ bountyId, bountyTitle, trigger }: 
                 <span className="text-sm font-medium">Available Funds</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                You have <span className="font-semibold text-blue-400">{availableFunds} ETH</span> available for funding bounties.
+                You have <span className="font-semibold text-blue-400">{availableFunds} MON</span> available for funding bounties.
               </p>
             </div>
 
@@ -140,7 +140,7 @@ export default function HackerFundingDialog({ bountyId, bountyTitle, trigger }: 
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="amount">Amount (ETH)</Label>
+              <Label htmlFor="amount">Amount (MON)</Label>
               <Input
                 id="amount"
                 type="number"
@@ -153,7 +153,7 @@ export default function HackerFundingDialog({ bountyId, bountyTitle, trigger }: 
               />
               {requestedAmount > maxAmount && (
                 <p className="text-sm text-red-400">
-                  Amount exceeds available funds ({availableFunds} ETH)
+                  Amount exceeds available funds ({availableFunds} MON)
                 </p>
               )}
             </div>
